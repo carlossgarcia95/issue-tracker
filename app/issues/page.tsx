@@ -5,13 +5,7 @@ import IssueActions from "./IssueActions";
 import Link from "next/link";
 
 const IssuesPage = async () => {
-  function delay(ms: number) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, ms);
-    });
-  }
   const issues = await prisma.issue.findMany();
-  await delay(2000);
 
   return (
     <div>
