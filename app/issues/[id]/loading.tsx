@@ -1,11 +1,22 @@
-import React from 'react'
+import { Box, Card, Flex } from "@radix-ui/themes";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const LoaingIssueDetailPage = () => {
   return (
-    <div>
-      Loading...
-    </div>
-  )
-}
+    <Box className="max-w-2xl">
+      <Skeleton />
+      <Flex gap={"3"} my={"2"}>
+        <Skeleton width={"5rem"} />
+        <Skeleton width={"8rem"} />
+      </Flex>
+      {/* Install tailwind typography to have content rendered with HTML format. 
+      Add prose to parent container */}
+      <Card className="prose" mt={"4"}>
+        <Skeleton count={3} />
+      </Card>
+    </Box>
+  );
+};
 
-export default LoaingIssueDetailPage
+export default LoaingIssueDetailPage;
