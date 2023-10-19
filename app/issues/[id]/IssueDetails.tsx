@@ -14,7 +14,7 @@ const IssueDetails = ({ issue }: { issue: Issue }) => {
       </Flex>
       {/* Install tailwind typography to have content rendered with HTML format. 
     Add prose to parent container */}
-      <Card className="prose" mt={"4"}>
+      <Card className="prose max-w-full" mt={"4"}>
         <ReactMarkdown>{issue.description}</ReactMarkdown>
       </Card>
     </Fragment>
