@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
-import {IssueStatusBadge, Link} from '@/app/components'
+import { IssueStatusBadge, Link } from "@/app/components";
 import IssueActions from "./IssueActions";
 
 const IssuesPage = async () => {
@@ -25,7 +25,7 @@ const IssuesPage = async () => {
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                <Link href={`/issues/${issue.id}`} >{issue.title}</Link>
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                 <div className="md:hidden">
                   <IssueStatusBadge status={issue.status} />
                 </div>
@@ -43,5 +43,11 @@ const IssuesPage = async () => {
     </div>
   );
 };
+
+// Change this route to dynamic, meaning it will change everytime a new issue is added
+export const dynamic = "force-dynamic";
+
+// Page is revalidated every 0 seconds.
+// export const revalidate = 0;
 
 export default IssuesPage;
