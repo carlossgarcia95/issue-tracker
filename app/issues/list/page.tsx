@@ -1,10 +1,10 @@
-import prisma from "@/prisma/client";
-import { Table } from "@radix-ui/themes";
-import NextLink from "next/link";
 import { IssueStatusBadge, Link } from "@/app/components";
-import IssueActions from "./IssueActions";
+import prisma from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
+import { Table } from "@radix-ui/themes";
+import NextLink from "next/link";
+import IssueActions from "./IssueActions";
 
 interface Props {
   searchParams: { status: Status; orderBy: keyof Issue };
@@ -46,7 +46,10 @@ const IssuesPage = async ({ searchParams }: Props) => {
         <Table.Header>
           <Table.Row>
             {columns.map((column) => (
-              <Table.ColumnHeaderCell key={column.value}>
+              <Table.ColumnHeaderCell
+                key={column.value}
+                className={column.className}
+              >
                 <NextLink
                   href={{
                     query: { ...searchParams, orderBy: column.value },
