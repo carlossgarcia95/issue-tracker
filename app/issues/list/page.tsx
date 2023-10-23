@@ -1,9 +1,10 @@
 import Pagination from "@/app/components/Pagination";
 import prisma from "@/prisma/client";
 import { Status } from "@prisma/client";
+import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 import IssueActions from "./IssueActions";
 import IssueTable, { IssueQuery, columnNames } from "./IssueTable";
-import { Flex } from "@radix-ui/themes";
 
 interface Props {
   searchParams: IssueQuery;
@@ -35,7 +36,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   });
 
   return (
-    <Flex direction={'column'} gap={'3'}>
+    <Flex direction={"column"} gap={"3"}>
       <IssueActions />
       <IssueTable searchParams={searchParams} issues={issues} />
       <Pagination
@@ -49,6 +50,11 @@ const IssuesPage = async ({ searchParams }: Props) => {
 
 // Change this route to dynamic, meaning it will change everytime a new issue is added
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issue List",
+  description: "View all project issues",
+};
 
 // Page is revalidated every 0 seconds.
 // export const revalidate = 0;
