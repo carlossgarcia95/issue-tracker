@@ -9,7 +9,7 @@ const IssueDetails = ({ issue }: { issue: Issue }) => {
     <Fragment>
       <Heading>{issue.title}</Heading>
       <Flex gap={"3"} my={"2"}>
-        <IssueStatusBadge status={issue.status} />
+        <IssueStatusBadge status={issue.status} issueId={issue.id}/>
         <Text>{issue.createdAt.toDateString()}</Text>
       </Flex>
       {/* Install tailwind typography to have content rendered with HTML format. 

@@ -1,10 +1,14 @@
 "use client";
 
 import { Status } from "@prisma/client";
-import { Select, Badge } from "@radix-ui/themes";
-import { useMutation } from "@tanstack/react-query";
+import { Badge, Select } from "@radix-ui/themes";
 import axios from "axios";
-import classNames from "classnames";
+import { useRouter } from "next/navigation";
+
+interface Props {
+  status: Status;
+  issueId: any;
+}
 
 const statusMap: Record<
   Status,
@@ -24,14 +28,27 @@ const statusMap: Record<
   },
 };
 
-const IssueStatusBadge = ({ status }: { status: Status }) => {
+const IssueStatusBadge = ({ status, issueId }: Props) => {
+  const router = useRouter();
+  const updateStatus = async (status: Status) => {
+    try {
+      await axios.patch(`/api/issues/${issueId}/status`, { issueId, status });
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <Select.Root defaultValue={status}>
+    <Select.Root defaultValue={status} onValueChange={updateStatus}>
       <Select.Trigger variant="ghost" />
       <Select.Content variant="soft">
         <Select.Group>
           {Object.keys(statusMap).map((statusKey) => (
-            <Select.Item  key={statusKey} value={statusKey} className="hover:bg-slate-100">
+            <Select.Item
+              key={statusKey}
+              value={statusKey}
+              className="hover:bg-slate-100"
+            >
               <Badge color={statusMap[statusKey as Status].color}>
                 {statusMap[statusKey as Status].label}
               </Badge>
